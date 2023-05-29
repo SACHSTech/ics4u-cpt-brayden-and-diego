@@ -13,7 +13,7 @@ public class team {
     protected double trg22;
     protected double trg21;
 
-    public team(String teamName, double ppg22, double ppg21,double pct22,double pct21, double assists22, double assists21,double tpg22, double tpg21, double trg22, double trg12 ){
+    public team(String teamName, double ppg22, double ppg21,double pct22,double pct21, double assists22, double assists21,double tpg22, double tpg21, double trg22, double trg21 ){
         teamName = this.teamName;
         ppg22 = this.ppg22;
         ppg21 = this.ppg21;
@@ -28,7 +28,7 @@ public class team {
 
     }
 
-    
+
     public String getTeamName() {
         return teamName;
     }
