@@ -28,5 +28,50 @@ public class team {
 
     }
     
+     public String getTeamName() {
+        return teamName;
+    }
+    
+    public double getPpg22() {
+        return ppg22;
+    }
+    
+    public double getPpg21() {
+        return ppg21;
+    }
+    
+    public double getPct22() {
+        return pct22;
+    }
+    
+    public double getPct21() {
+        return pct21;
+    }
+    
+    public double getAssists22() {
+        return assists22;
+    }
+    
+    public double getAssists21() {
+        return assists21;
+    }
+    
+    public double getTpg22() {
+        return tpg22;
+    }
+    
+    public double getTpg21() {
+        return tpg21;
+    }
+    
+    public double getTrg22() {
+        return trg22;
+    }
+    
+    public double getTrg21() {
+        return trg21;
+    }
+
+
 
 }
