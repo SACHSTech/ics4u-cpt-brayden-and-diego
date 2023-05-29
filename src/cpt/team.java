@@ -27,8 +27,9 @@ public class team {
         trg21 = this.trg21;
 
     }
+
     
-     public String getTeamName() {
+    public String getTeamName() {
         return teamName;
     }
     
