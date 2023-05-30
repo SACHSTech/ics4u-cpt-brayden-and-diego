@@ -1,6 +1,6 @@
 package cpt;
 
-public class team {
+public class Team {
     protected String teamName;
     protected String ppg22;
     protected String ppg21;
@@ -13,7 +13,7 @@ public class team {
     protected String trg22;
     protected String trg21;
 
-    public team(String teamName, String ppg22, String ppg21,String pct22,String pct21, String assists22, String assists21,String tpg22, String tpg21, String trg22, String trg21 ){
+    public Team(String teamName, String ppg22, String ppg21,String pct22,String pct21, String assists22, String assists21,String tpg22, String tpg21, String trg22, String trg21 ){
         teamName = this.teamName;
         ppg22 = this.ppg22;
         ppg21 = this.ppg21;
