@@ -15,11 +15,10 @@ public class readFile {
             BufferedReader br = new BufferedReader(new FileReader(strPath));
 
             while((nextLine = br.readLine()) != null){
-                for(int i = 0; i < 11; i++){
-                    String[] arrTemp = nextLine.split(",");
-                    Team a = new Team(arrTemp[0], arrTemp[1], arrTemp[2], arrTemp[3], arrTemp[4], arrTemp[5], arrTemp[6], arrTemp[7], arrTemp[8], arrTemp[9], arrTemp[10]);
-                    list.add(a); 
-                }
+               String[] arrTemp = nextLine.split(",");
+               Team a = new Team(arrTemp[0].toString(), arrTemp[1].toString(), arrTemp[2].toString(), arrTemp[3].toString(), arrTemp[4].toString(), arrTemp[5].toString(), arrTemp[6].toString(), arrTemp[7].toString(), arrTemp[8].toString(), arrTemp[9].toString(), arrTemp[10].toString());
+               list.add(a); 
+                
             }
         
         } catch (FileNotFoundException e) {
