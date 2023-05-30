@@ -1,6 +1,7 @@
 package cpt;
 
 public class Team {
+ 
     protected String teamName;
     protected String ppg22;
     protected String ppg21;
@@ -76,3 +77,5 @@ public class Team {
 
 
 }
+
+
