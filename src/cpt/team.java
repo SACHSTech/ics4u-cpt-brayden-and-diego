@@ -15,17 +15,17 @@ public class Team {
     protected String trg21;
 
     public Team(String teamName, String ppg22, String ppg21,String pct22,String pct21, String assists22, String assists21,String tpg22, String tpg21, String trg22, String trg21 ){
-        teamName = this.teamName;
-        ppg22 = this.ppg22;
-        ppg21 = this.ppg21;
-        pct22 = this.pct22;
-        pct21 = this.pct21;
-        assists22 = this.assists22;
-        assists21 = this.assists21;
-        tpg22 = this.tpg22;
-        tpg21 = this.tpg21;
-        trg22 = this.trg22;
-        trg21 = this.trg21;
+        this.teamName = teamName;
+        this.ppg22 = ppg22;
+        this.ppg21 = ppg21;
+        this.pct22 = pct22;
+        this.pct21 = pct21;
+        this.assists22 = assists22;
+        this.assists21 = assists21;
+        this.tpg22 = tpg22;
+        this.tpg21 = tpg21;
+        this.trg22 = trg22;
+        this.trg21 = trg21;
 
     }
 
