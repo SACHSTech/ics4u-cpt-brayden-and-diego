@@ -1,30 +1,31 @@
 package cpt;
 
-public class team {
+public class Team {
+ 
     protected String teamName;
-    protected double ppg22;
-    protected double ppg21;
-    protected double pct22;
-    protected double pct21;
-    protected double assists22;
-    protected double assists21;
-    protected double tpg22;
-    protected double tpg21;
-    protected double trg22;
-    protected double trg21;
+    protected String ppg22;
+    protected String ppg21;
+    protected String pct22;
+    protected String pct21;
+    protected String assists22;
+    protected String assists21;
+    protected String tpg22;
+    protected String tpg21;
+    protected String trg22;
+    protected String trg21;
 
-    public team(String teamName, double ppg22, double ppg21,double pct22,double pct21, double assists22, double assists21,double tpg22, double tpg21, double trg22, double trg21 ){
-        teamName = this.teamName;
-        ppg22 = this.ppg22;
-        ppg21 = this.ppg21;
-        pct22 = this.pct22;
-        pct21 = this.pct21;
-        assists22 = this.assists22;
-        assists21 = this.assists21;
-        tpg22 = this.tpg22;
-        tpg21 = this.tpg21;
-        trg22 = this.trg22;
-        trg21 = this.trg21;
+    public Team(String teamName, String ppg22, String ppg21,String pct22,String pct21, String assists22, String assists21,String tpg22, String tpg21, String trg22, String trg21 ){
+        this.teamName = teamName;
+        this.ppg22 = ppg22;
+        this.ppg21 = ppg21;
+        this.pct22 = pct22;
+        this.pct21 = pct21;
+        this.assists22 = assists22;
+        this.assists21 = assists21;
+        this.tpg22 = tpg22;
+        this.tpg21 = tpg21;
+        this.trg22 = trg22;
+        this.trg21 = trg21;
 
     }
 
@@ -33,46 +34,48 @@ public class team {
         return teamName;
     }
     
-    public double getPpg22() {
+    public String getPpg22() {
         return ppg22;
     }
     
-    public double getPpg21() {
+    public String getPpg21() {
         return ppg21;
     }
     
-    public double getPct22() {
+    public String getPct22() {
         return pct22;
     }
     
-    public double getPct21() {
+    public String getPct21() {
         return pct21;
     }
     
-    public double getAssists22() {
+    public String getAssists22() {
         return assists22;
     }
     
-    public double getAssists21() {
+    public String getAssists21() {
         return assists21;
     }
     
-    public double getTpg22() {
+    public String getTpg22() {
         return tpg22;
     }
     
-    public double getTpg21() {
+    public String getTpg21() {
         return tpg21;
     }
     
-    public double getTrg22() {
+    public String getTrg22() {
         return trg22;
     }
     
-    public double getTrg21() {
+    public String getTrg21() {
         return trg21;
     }
 
 
 
 }
+
+
