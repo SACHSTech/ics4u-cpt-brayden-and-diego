@@ -39,8 +39,9 @@ public class Sortingpt2 {
 	     //find the index of the min of the unsorted list
             for (int j = i + 1; j < arr.length; j++)
             {
-                if(arr[j] < arr[currentMinIndex])
-                {
+                double current = Double.parseDouble(getProperty(arr[j], property));
+                double minindex = Double.parseDouble(getProperty(arr[currentMinIndex], property));
+                if(current < minindex){
                     currentMinIndex = j;
                 }
             }
@@ -48,13 +49,12 @@ public class Sortingpt2 {
             // swap numbers if needed
             if (i != currentMinIndex)
             {
-                int temp = b[currentMinIndex];
-                arr[currentMinIndex] = arr[i];
-                arr[i] = temp;
+                Team temp = arr[i];
+                arr[i] = arr[currentMinIndex];
+                arr[currentMinIndex] = temp;
+
             }
         }
-        
-        return arr;
     }
 
 }
