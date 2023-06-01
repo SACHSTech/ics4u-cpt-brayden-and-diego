@@ -28,9 +28,9 @@ public class Sortingpt2 {
             return "";
         }
     }
-    private void getppg22sort(Team[] arr, String property){
+    public static void sort(Team[] arr, String property){
         int currentMinIndex;
-        for (int i = 0; i < arr.length - 1; i++)  // i represents front of the unsorted list
+        for (int i = 1; i < arr.length - 1; i++)  // i represents front of the unsorted list, start at one to skip the first row
         {
 
             // set current min to front of unsorted list
