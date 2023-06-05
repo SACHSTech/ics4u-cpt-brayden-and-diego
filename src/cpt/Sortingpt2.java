@@ -1,7 +1,14 @@
 package cpt;
 
+/**
+ * this function gets a specific property from a team object using a string that specifies the wanted property
+ * @param obj: team object from which you want to get the property
+ * @param x: string that specifies the property thats wanted
+ * @return the wanted property from the objcet
+ */
 public class Sortingpt2 {
     public static String getProperty(Team obj, String x){
+        //switch case running through all the possibilites (all the numerical properties of team)
         switch(x){
         case "ppg22":
             return obj.getPpg22();
@@ -28,6 +35,12 @@ public class Sortingpt2 {
             return "";
         }
     }
+    
+    /**
+     * This is an adaptation of selection sort that will sort an array of objects by one of their properties
+     * @param arr: the array of teams that wil be sorted
+     * @param property: the property that it will be sorted by
+     */
     public static void sort(Team[] arr, String property){
         int currentMinIndex;
         for (int i = 1; i < arr.length - 1; i++)  // i represents front of the unsorted list, start at one to skip the first row
@@ -39,8 +52,11 @@ public class Sortingpt2 {
 	     //find the index of the min of the unsorted list
             for (int j = i + 1; j < arr.length; j++)
             {
+                //create variables to be compared, it uses the the get property function in order to return the asked property using the string paramter
                 double current = Double.parseDouble(getProperty(arr[j], property));
                 double minindex = Double.parseDouble(getProperty(arr[currentMinIndex], property));
+                
+                //compare value of specific property of the object
                 if(current < minindex){
                     currentMinIndex = j;
                 }

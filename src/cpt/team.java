@@ -14,6 +14,20 @@ public class Team {
     protected String trg22;
     protected String trg21;
 
+    /**
+     * this is an object of type team it will sort all the statistics associated with a given team
+     * @param teamName: name
+     * @param ppg22: points per game 2022
+     * @param ppg21: point per game 2021
+     * @param pct22: 3 point percentage 2022
+     * @param pct21: 3 point percentage 2021
+     * @param assists22: assits in 2022
+     * @param assists21: assists in 2021
+     * @param tpg22: turnovers per game 2022
+     * @param tpg21: turnovers per game 2021
+     * @param trg22: total reboubnd per game 2022
+     * @param trg21: total rebound per game 2021
+     */
     public Team(String teamName, String ppg22, String ppg21,String pct22,String pct21, String assists22, String assists21,String tpg22, String tpg21, String trg22, String trg21 ){
         this.teamName = teamName;
         this.ppg22 = ppg22;
@@ -29,7 +43,7 @@ public class Team {
 
     }
 
-
+    //getter functions
     public String getTeamName() {
         return teamName;
     }
