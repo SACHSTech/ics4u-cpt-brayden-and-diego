@@ -10,6 +10,8 @@ public class Sortingpt2 {
     public static String getProperty(Team obj, String x){
         //switch case running through all the possibilites (all the numerical properties of team)
         switch(x){
+        case "teamname":
+            return obj.getTeamName();
         case "ppg22":
             return obj.getPpg22();
         case "ppg21":
@@ -52,13 +54,22 @@ public class Sortingpt2 {
 	     //find the index of the min of the unsorted list
             for (int j = i + 1; j < arr.length; j++)
             {
-                //create variables to be compared, it uses the the get property function in order to return the asked property using the string paramter
-                double current = Double.parseDouble(getProperty(arr[j], property));
-                double minindex = Double.parseDouble(getProperty(arr[currentMinIndex], property));
+                if (property.equals("teamname")) {
+                    double current = getProperty(arr[j], property).charAt(0);
+                    double minindex = getProperty(arr[currentMinIndex], property).charAt(0);
+
+                    if(current < minindex){
+                        currentMinIndex = j;
+                    }
+                } else {
+                    //create variables to be compared, it uses the the get property function in order to return the asked property using the string paramter
+                    double current = Double.parseDouble(getProperty(arr[j], property));
+                    double minindex = Double.parseDouble(getProperty(arr[currentMinIndex], property));
                 
-                //compare value of specific property of the object
-                if(current < minindex){
+                    //compare value of specific property of the object
+                    if(current < minindex){
                     currentMinIndex = j;
+                    }
                 }
             }
             
