@@ -1,8 +1,10 @@
 package cpt;
 
+import java.util.ArrayList;
+
 public class Main {
     public static void main(String[] args) {
-        Team[] a = readFile.readDataFile("C:/Users/stoic/Comp Sci Grade 12/ics4u-cpt-brayden-and-diego/src/cpt/Comp Sci CPT spreadsheet - Points Per Game.csv");
+        ArrayList<Team> a = readFile.readDataFile("src/cpt/Comp Sci CPT spreadsheet - Points Per Game.csv");
         Sortingpt2.sort(a,"ppg22");
 
         for (Team team : a) {
