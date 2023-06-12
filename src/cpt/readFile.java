@@ -12,9 +12,9 @@ public class readFile {
      * @param strPath: the path of the file
      * @return: and array of objects of the Team class, this is useful as it allows for all the stats to be bundled as a team
      */
-    public static Team[] readDataFile(String strPath) {
+    public static ArrayList<Team> readDataFile(String strPath) {
         //declaring variables
-        List<Team> list = new ArrayList<Team>(); 
+        ArrayList<Team> list = new ArrayList<Team>(); 
         String nextLine = "";
 
         //try catch exceptions
@@ -36,11 +36,10 @@ public class readFile {
             e.printStackTrace();
         }
 
-        //convert array list to array
-        Team [] finalArray =  new Team[list.size()];
-        list.toArray(finalArray);
+       
         
-        //return array
-        return finalArray;
+        //return array list
+        return list;
     }
+    
 }
