@@ -44,6 +44,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 
@@ -70,6 +72,10 @@ public class TableViewApp extends Application {
     public Parent createContent() {
        
         final ObservableList<Team> data = FXCollections.observableArrayList(readFile.readDataFile("src/cpt/Comp Sci CPT spreadsheet - Points Per Game.csv"));
+
+        
+        TableView tableView = new TableView();
+       
 
         TableColumn<String, Team> firstNameCol = new TableColumn<>();
         firstNameCol.setText("Team Name");
@@ -116,15 +122,50 @@ public class TableViewApp extends Application {
         trg21Col.setText("TRG 2021");
         trg21Col.setCellValueFactory(new PropertyValueFactory<>("trg21"));
 
-        Button sortPPG22Button = new Button("Sort by PPG 2022");
-        sortPPG22Button.setOnAction(e -> tableView.setItems(sorter(data, "ppg22")) );
-       
+        Button sortTeamNameButton = new Button("Sort by Team Name");
+        sortTeamNameButton.setOnAction(e -> tableView.setItems(sorter(data, "teamName")));
 
-        final TableView tableView = new TableView();
+        Button sortPPG22Button = new Button("Sort by PPG 2022");
+        sortPPG22Button.setOnAction(e -> tableView.setItems(sorter(data, "ppg22")));
+
+        Button sortPPG21Button = new Button("Sort by PPG 2021");
+        sortPPG21Button.setOnAction(e -> tableView.setItems(sorter(data, "ppg21")));
+
+        Button sortPCT22Button = new Button("Sort by PCT 2022");
+        sortPCT22Button.setOnAction(e -> tableView.setItems(sorter(data, "pct22")));
+
+        Button sortPCT21Button = new Button("Sort by PCT 2021");
+        sortPCT21Button.setOnAction(e -> tableView.setItems(sorter(data, "pct21")));
+
+        Button sortAssists22Button = new Button("Sort by Assists 2022");
+        sortAssists22Button.setOnAction(e -> tableView.setItems(sorter(data, "assists22")));
+
+        Button sortAssists21Button = new Button("Sort by Assists 2021");
+        sortAssists21Button.setOnAction(e -> tableView.setItems(sorter(data, "assists21")));
+
+        Button sortTPG22Button = new Button("Sort by TPG 2022");
+        sortTPG22Button.setOnAction(e -> tableView.setItems(sorter(data, "tpg22")));
+
+        Button sortTPG21Button = new Button("Sort by TPG 2021");
+        sortTPG21Button.setOnAction(e -> tableView.setItems(sorter(data, "tpg21")));
+
+        Button sortTRG22Button = new Button("Sort by TRG 2022");
+        sortTRG22Button.setOnAction(e -> tableView.setItems(sorter(data, "trg22")));
+
+        Button sortTRG21Button = new Button("Sort by TRG 2021");
+        sortTRG21Button.setOnAction(e -> tableView.setItems(sorter(data, "trg21")));
+
+        HBox buttons = new HBox(10);
+        buttons.getChildren().addAll(sortTeamNameButton, sortPPG22Button, sortPPG21Button, sortPCT22Button, sortPCT21Button, sortAssists22Button, sortAssists21Button, sortTPG22Button, sortTPG21Button, sortTRG22Button, sortTRG21Button);
+       
         tableView.setItems(data);
         tableView.getColumns().addAll(firstNameCol, PPG22Col, PPG21Col, pct22Col, pct21Col, assists22Col, assists21Col, tpg22Col, tpg21Col, trg22Col, trg21Col);
         
-        return tableView;
+
+        VBox finalDisplay = new VBox(10);
+        finalDisplay.getChildren().addAll(buttons, tableView);
+
+        return finalDisplay;
 
     }
     
