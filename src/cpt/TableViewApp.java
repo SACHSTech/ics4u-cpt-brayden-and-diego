@@ -33,15 +33,19 @@ package cpt;
 
 
 
+import java.util.ArrayList;
+
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+
 
 /**
  * A simple table with a header row.
@@ -61,6 +65,8 @@ import javafx.stage.Stage;
  */
 public class TableViewApp extends Application {
 
+    private TableView<Team> tableView;
+
     public Parent createContent() {
        
         final ObservableList<Team> data = FXCollections.observableArrayList(readFile.readDataFile("src/cpt/Comp Sci CPT spreadsheet - Points Per Game.csv"));
@@ -69,7 +75,7 @@ public class TableViewApp extends Application {
         firstNameCol.setText("Team Name");
         firstNameCol.setCellValueFactory(new PropertyValueFactory<>("teamName"));
         
-        TableColumn<String, Team> PPG22Col = new TableColumn();
+        TableColumn<String, Team> PPG22Col = new TableColumn<>();
         PPG22Col.setText("PPG 2022");
         PPG22Col.setCellValueFactory(new PropertyValueFactory<>("ppg22"));
         
@@ -110,10 +116,23 @@ public class TableViewApp extends Application {
         trg21Col.setText("TRG 2021");
         trg21Col.setCellValueFactory(new PropertyValueFactory<>("trg21"));
 
+        Button sortPPG22Button = new Button("Sort by PPG 2022");
+        sortPPG22Button.setOnAction(e -> tableView.setItems(sorter(data, "ppg22")) );
+       
+
         final TableView tableView = new TableView();
         tableView.setItems(data);
         tableView.getColumns().addAll(firstNameCol, PPG22Col, PPG21Col, pct22Col, pct21Col, assists22Col, assists21Col, tpg22Col, tpg21Col, trg22Col, trg21Col);
+        
         return tableView;
+
+    }
+    
+    //method to use our sorting algorithmn on an obserbable list
+    private ObservableList<Team> sorter(ObservableList<Team> x, String property){
+        ArrayList<Team> y = new ArrayList<>(x);
+        Sortingpt2.sort(y, property);
+        return FXCollections.observableArrayList(y);
     }
 
     @Override public void start(Stage primaryStage) throws Exception {
