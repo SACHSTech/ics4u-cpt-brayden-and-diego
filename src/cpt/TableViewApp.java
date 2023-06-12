@@ -66,19 +66,54 @@ public class TableViewApp extends Application {
        
         final ObservableList<Team> data = FXCollections.observableArrayList(readFile.readDataFile("src/cpt/Comp Sci CPT spreadsheet - Points Per Game.csv"));
 
-        TableColumn firstNameCol = new TableColumn();
+        TableColumn<String, Team> firstNameCol = new TableColumn<>();
         firstNameCol.setText("Team Name");
-        firstNameCol.setCellValueFactory(new PropertyValueFactory("teamName"));
-        TableColumn lastNameCol = new TableColumn();
-        lastNameCol.setText("PPG 2022");
-        lastNameCol.setCellValueFactory(new PropertyValueFactory("ppg22"));
-        TableColumn emailCol = new TableColumn();
-        emailCol.setText("PPG21");
-        emailCol.setMinWidth(200);
-        emailCol.setCellValueFactory(new PropertyValueFactory("ppg21"));
+        firstNameCol.setCellValueFactory(new PropertyValueFactory<>("teamName"));
+        
+        TableColumn<String, Team> PPG22Col = new TableColumn();
+        PPG22Col.setText("PPG 2022");
+        PPG22Col.setCellValueFactory(new PropertyValueFactory<>("ppg22"));
+        
+        TableColumn<String, Team> PPG21Col = new TableColumn<>();
+        PPG21Col.setText("PPG 2021");
+        PPG21Col.setMinWidth(200);
+        PPG21Col.setCellValueFactory(new PropertyValueFactory<>("ppg21"));
+        
+        TableColumn<String, Team> pct22Col = new TableColumn<>();
+        pct22Col.setText("PCT 2022");
+        pct22Col.setCellValueFactory(new PropertyValueFactory<>("pct22"));
+
+        TableColumn<String, Team> pct21Col = new TableColumn<>();
+        pct21Col.setText("PCT 2021");
+        pct21Col.setCellValueFactory(new PropertyValueFactory<>("pct21"));
+
+        TableColumn<String, Team> assists22Col = new TableColumn<>();
+        assists22Col.setText("Assists 2022");
+        assists22Col.setCellValueFactory(new PropertyValueFactory<>("assists22"));
+
+        TableColumn<String, Team> assists21Col = new TableColumn<>();
+        assists21Col.setText("Assists 2021");
+        assists21Col.setCellValueFactory(new PropertyValueFactory<>("assists21"));
+
+        TableColumn<String, Team> tpg22Col = new TableColumn<>();
+        tpg22Col.setText("TPG 2022");
+        tpg22Col.setCellValueFactory(new PropertyValueFactory<>("tpg22"));
+
+        TableColumn<String, Team> tpg21Col = new TableColumn<>();
+        tpg21Col.setText("TPG 2021");
+        tpg21Col.setCellValueFactory(new PropertyValueFactory<>("tpg21"));
+
+        TableColumn<String, Team> trg22Col = new TableColumn<>();
+        trg22Col.setText("TRG 2022");
+        trg22Col.setCellValueFactory(new PropertyValueFactory<>("trg22"));
+
+        TableColumn<String, Team> trg21Col = new TableColumn<>();
+        trg21Col.setText("TRG 2021");
+        trg21Col.setCellValueFactory(new PropertyValueFactory<>("trg21"));
+
         final TableView tableView = new TableView();
         tableView.setItems(data);
-        tableView.getColumns().addAll(firstNameCol, lastNameCol, emailCol);
+        tableView.getColumns().addAll(firstNameCol, PPG22Col, PPG21Col, pct22Col, pct21Col, assists22Col, assists21Col, tpg22Col, tpg21Col, trg22Col, trg21Col);
         return tableView;
     }
 
