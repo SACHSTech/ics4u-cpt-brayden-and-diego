@@ -89,44 +89,19 @@ public class TableViewApp extends Application {
         }
         
 
- 
+        Button [] buttonsFinal = new Button[columns.length];
+        for (int i = 0; i < columns.length; i++) {
+            final int index = i;
+            String x = columns[i];
+            Button button = new Button("Sort by " + x);
+            button.setOnAction(e -> tableView.setItems(sorter(data, teamFields[index])));
+            buttonsFinal[i] = button;
+        }
 
-        Button sortTeamNameButton = new Button("Sort by Team Name");
-        sortTeamNameButton.setOnAction(e -> tableView.setItems(sorter(data, "teamName")));
-
-        Button sortPPG22Button = new Button("Sort by PPG 2022");
-        sortPPG22Button.setOnAction(e -> tableView.setItems(sorter(data, "ppg22")));
-
-        Button sortPPG21Button = new Button("Sort by PPG 2021");
-        sortPPG21Button.setOnAction(e -> tableView.setItems(sorter(data, "ppg21")));
-
-        Button sortPCT22Button = new Button("Sort by PCT 2022");
-        sortPCT22Button.setOnAction(e -> tableView.setItems(sorter(data, "pct22")));
-
-        Button sortPCT21Button = new Button("Sort by PCT 2021");
-        sortPCT21Button.setOnAction(e -> tableView.setItems(sorter(data, "pct21")));
-
-        Button sortAssists22Button = new Button("Sort by Assists 2022");
-        sortAssists22Button.setOnAction(e -> tableView.setItems(sorter(data, "assists22")));
-
-        Button sortAssists21Button = new Button("Sort by Assists 2021");
-        sortAssists21Button.setOnAction(e -> tableView.setItems(sorter(data, "assists21")));
-
-        Button sortTPG22Button = new Button("Sort by TPG 2022");
-        sortTPG22Button.setOnAction(e -> tableView.setItems(sorter(data, "tpg22")));
-
-        Button sortTPG21Button = new Button("Sort by TPG 2021");
-        sortTPG21Button.setOnAction(e -> tableView.setItems(sorter(data, "tpg21")));
-
-        Button sortTRG22Button = new Button("Sort by TRG 2022");
-        sortTRG22Button.setOnAction(e -> tableView.setItems(sorter(data, "trg22")));
-
-        Button sortTRG21Button = new Button("Sort by TRG 2021");
-        sortTRG21Button.setOnAction(e -> tableView.setItems(sorter(data, "trg21")));
+       
 
         HBox buttons = new HBox(10);
-        buttons.getChildren().addAll(sortTeamNameButton, sortPPG22Button, sortPPG21Button, sortPCT22Button, sortPCT21Button, sortAssists22Button, sortAssists21Button, sortTPG22Button, sortTPG21Button, sortTRG22Button, sortTRG21Button);
-       
+        buttons.getChildren().addAll(buttonsFinal);
         tableView.setItems(data);
         tableView.getColumns().addAll(columnsFinal);
         
