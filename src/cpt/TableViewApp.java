@@ -41,6 +41,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -76,51 +77,19 @@ public class TableViewApp extends Application {
         
         TableView tableView = new TableView();
        
-
-        TableColumn<String, Team> firstNameCol = new TableColumn<>();
-        firstNameCol.setText("Team Name");
-        firstNameCol.setCellValueFactory(new PropertyValueFactory<>("teamName"));
+        final String[] columns = {"Team Name", "PPG 2022", "PPG 2021", "PCT 2022", "PCT 2021", "Assists 2022", "Assists 2021", "TPG 2022", "TPG 2021", "TRG 2022", "TRG 2021" };
+        final String[] teamFields = {"teamName", "ppg22", "ppg21", "pct22", "pct21", "assists22", "assists21", "tpg22", "tpg21", "trg22", "trg21" };
         
-        TableColumn<String, Team> PPG22Col = new TableColumn<>();
-        PPG22Col.setText("PPG 2022");
-        PPG22Col.setCellValueFactory(new PropertyValueFactory<>("ppg22"));
+        TableColumn<Team, String>[] columnsFinal = new TableColumn[columns.length];
+
+        for (int i =0; i < columns.length; i ++){
+            TableColumn<Team, String> x = new TableColumn<>(columns[i]);
+            x.setCellValueFactory(new PropertyValueFactory<>(teamFields[i]));
+            columnsFinal[i] = x;
+        }
         
-        TableColumn<String, Team> PPG21Col = new TableColumn<>();
-        PPG21Col.setText("PPG 2021");
-        PPG21Col.setMinWidth(200);
-        PPG21Col.setCellValueFactory(new PropertyValueFactory<>("ppg21"));
-        
-        TableColumn<String, Team> pct22Col = new TableColumn<>();
-        pct22Col.setText("PCT 2022");
-        pct22Col.setCellValueFactory(new PropertyValueFactory<>("pct22"));
 
-        TableColumn<String, Team> pct21Col = new TableColumn<>();
-        pct21Col.setText("PCT 2021");
-        pct21Col.setCellValueFactory(new PropertyValueFactory<>("pct21"));
-
-        TableColumn<String, Team> assists22Col = new TableColumn<>();
-        assists22Col.setText("Assists 2022");
-        assists22Col.setCellValueFactory(new PropertyValueFactory<>("assists22"));
-
-        TableColumn<String, Team> assists21Col = new TableColumn<>();
-        assists21Col.setText("Assists 2021");
-        assists21Col.setCellValueFactory(new PropertyValueFactory<>("assists21"));
-
-        TableColumn<String, Team> tpg22Col = new TableColumn<>();
-        tpg22Col.setText("TPG 2022");
-        tpg22Col.setCellValueFactory(new PropertyValueFactory<>("tpg22"));
-
-        TableColumn<String, Team> tpg21Col = new TableColumn<>();
-        tpg21Col.setText("TPG 2021");
-        tpg21Col.setCellValueFactory(new PropertyValueFactory<>("tpg21"));
-
-        TableColumn<String, Team> trg22Col = new TableColumn<>();
-        trg22Col.setText("TRG 2022");
-        trg22Col.setCellValueFactory(new PropertyValueFactory<>("trg22"));
-
-        TableColumn<String, Team> trg21Col = new TableColumn<>();
-        trg21Col.setText("TRG 2021");
-        trg21Col.setCellValueFactory(new PropertyValueFactory<>("trg21"));
+ 
 
         Button sortTeamNameButton = new Button("Sort by Team Name");
         sortTeamNameButton.setOnAction(e -> tableView.setItems(sorter(data, "teamName")));
@@ -159,7 +128,7 @@ public class TableViewApp extends Application {
         buttons.getChildren().addAll(sortTeamNameButton, sortPPG22Button, sortPPG21Button, sortPCT22Button, sortPCT21Button, sortAssists22Button, sortAssists21Button, sortTPG22Button, sortTPG21Button, sortTRG22Button, sortTRG21Button);
        
         tableView.setItems(data);
-        tableView.getColumns().addAll(firstNameCol, PPG22Col, PPG21Col, pct22Col, pct21Col, assists22Col, assists21Col, tpg22Col, tpg21Col, trg22Col, trg21Col);
+        tableView.getColumns().addAll(columnsFinal);
         
 
         VBox finalDisplay = new VBox(10);
