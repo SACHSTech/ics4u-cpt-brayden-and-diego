@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.stage.Stage;
  
  
@@ -22,50 +23,47 @@ public class BarChartApp extends Application {
  
     final ObservableList<Team> data = FXCollections.observableArrayList(readFile.readDataFile("src/cpt/Comp Sci CPT spreadsheet - Points Per Game.csv"));
     
-    
-
-    private BarChart chart;
+    private BarChart<String, Number> chart;
     private CategoryAxis xAxis;
     private NumberAxis yAxis;
- 
+
     public Parent createContent() {
-    
-    StringBuilder stringBuilder = new StringBuilder();
-
-    for (Team team : data) {
-        String firstColumn = team.getName(); // Assuming the first column is the team name
-        String assists = team.getAssists21();
-        stringBuilder.append(firstColumn).append(", ");
-        stringBuilder.append(assists).append(", ");
-
-    }
-
-    // Remove the trailing comma and whitespace
-    if (stringBuilder.length() > 0) {
-        stringBuilder.setLength(stringBuilder.length() - 2);
-    }
-
-    String firstColumnString = stringBuilder.toString();
-    String assiststring = stringBuilder.toString();
-
-    String[] teamname = new String[firstColumnString.length()];
-        for (int i = 0; i < firstColumnString.length(); i++) {
-        teamname[i] = String.valueOf(firstColumnString.charAt(i));
-    }
-
-    String[] assists = new String[assiststring.length()];
-        for (int i = 0; i < assiststring.length(); i++) {
-        assists[i] = String.valueOf(assiststring.charAt(i));
-    }
-
         xAxis = new CategoryAxis();
-        xAxis.setCategories(FXCollections.<String>observableArrayList(teamname));
-        yAxis = new NumberAxis("Units Sold", 0.0d, 3000.0d, 1000.0d);
-        ObservableList<BarChart.Series> barChartData = FXCollections.observableArrayList(
-              new BarChart.Series("Apples", FXCollections.observableArrayList(
-                new BarChart.Data(teamname[1], assists[1])))
-            );
-        chart = new BarChart(xAxis, yAxis, barChartData, 25.0d);
+        yAxis = new NumberAxis("Units Sold", 0.0d, 40, 10.0d);
+
+        ObservableList<String> teamNames = FXCollections.observableArrayList();
+        ObservableList<Number> chartData = FXCollections.observableArrayList();
+
+        boolean isFirstRow = true;
+        // Extract data from the first two columns of the ObservableList
+        for (Team entry : data) {
+            String teamName = entry.getTeamName();
+            
+            if (isFirstRow){
+                isFirstRow = false;
+                continue;
+            }
+
+            double unitsSold = Double.parseDouble(entry.getAssists21());
+
+            teamNames.add(teamName);
+            chartData.add(unitsSold);
+        }
+
+        xAxis.setCategories(teamNames);
+
+        ObservableList<BarChart.Series<String, Number>> barChartData = FXCollections.observableArrayList();
+        BarChart.Series<String, Number> series = new BarChart.Series<>();
+        series.setName("Units Sold");
+
+        for (int i = 0; i < chartData.size(); i++) {
+            XYChart.Data<String, Number> dataPoint = new XYChart.Data<>(teamNames.get(i), chartData.get(i));
+            series.getData().add(dataPoint);
+        }
+
+        barChartData.add(series);
+
+        chart = new BarChart<>(xAxis, yAxis, barChartData, 25.0d);
         return chart;
     }
  
