@@ -15,6 +15,8 @@ public class Team {
     protected String tpg21;
     protected String trg22;
     protected String trg21;
+    protected String name;
+
 
     /**
      * this is an object of type team it will sort all the statistics associated with a given team
@@ -88,6 +90,13 @@ public class Team {
     
     public String getTrg21() {
         return trg21;
+    }
+    public Team(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
     }
 
    

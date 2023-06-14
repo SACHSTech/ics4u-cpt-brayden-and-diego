@@ -12,7 +12,7 @@ public class Sortingpt2 {
     public static String getProperty(Team obj, String x){
         //switch case running through all the possibilites (all the numerical properties of team)
         switch(x){
-        case "teamname":
+        case "teamName":
             return obj.getTeamName();
         case "ppg22":
             return obj.getPpg22();
@@ -56,7 +56,7 @@ public class Sortingpt2 {
 	     //find the index of the min of the unsorted list
             for (int j = i + 1; j < arr.size(); j++)
             {
-                if (property.equals("teamname")) {
+                if (property.equals("teamName")) {
                     double current = getProperty(arr.get(j), property).charAt(0);
                     double minindex = getProperty(arr.get(currentMinIndex), property).charAt(0);
 
