@@ -29,7 +29,7 @@ public class BarChartApp extends Application {
 
     public Parent createContent() {
         xAxis = new CategoryAxis();
-        yAxis = new NumberAxis("Units Sold", 0.0d, 40, 10.0d);
+        yAxis = new NumberAxis("Points Per Game", 0.0d, 120, 10.0d);
 
         ObservableList<String> teamNames = FXCollections.observableArrayList();
         ObservableList<Number> chartData = FXCollections.observableArrayList();
@@ -44,10 +44,10 @@ public class BarChartApp extends Application {
                 continue;
             }
 
-            double unitsSold = Double.parseDouble(entry.getAssists21());
+            double chartdata= Double.parseDouble(entry.getPpg21());
 
             teamNames.add(teamName);
-            chartData.add(unitsSold);
+            chartData.add(chartdata);
         }
 
         xAxis.setCategories(teamNames);
@@ -63,8 +63,9 @@ public class BarChartApp extends Application {
 
         barChartData.add(series);
 
-        chart = new BarChart<>(xAxis, yAxis, barChartData, 25.0d);
+        chart = new BarChart<>(xAxis, yAxis, barChartData, 0d);
         return chart;
+        
     }
  
     @Override public void start(Stage primaryStage) throws Exception {
