@@ -10,6 +10,9 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Button;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
  
  
@@ -29,49 +32,9 @@ public class BarChartApp {
     static ObservableList<String> teamNames = FXCollections.observableArrayList();
     static ObservableList<Number> chartData = FXCollections.observableArrayList();
     static boolean isFirstRow = true;
-
-    public static Parent createBarGraph() {
-        xAxis = new CategoryAxis();
-        yAxis = new NumberAxis("Units Sold", 0.0d, 40, 10.0d);
-        
-        // Extract data from the first two columns of the ObservableList
-        for (Team entry : data) {
-            String teamName = entry.getTeamName();
-            
-            if (isFirstRow){
-                isFirstRow = false;
-                continue;
-            }
-
-
-            teamNames.add(teamName);
-            
-        }
-        xAxis.setGapStartAndEnd(true);
-        // Set the desired font size for the x-axis labels
-        double labelFontSize = 7.0;
-
-
-        xAxis.setStyle("-fx-tick-label-font-size: " + labelFontSize + "px;");
-
-        xAxis.setCategories(teamNames);
-
-        ObservableList<BarChart.Series<String, Number>> barChartData = FXCollections.observableArrayList();
-        BarChart.Series<String, Number> series = new BarChart.Series<>();
-        series.setName("Units Sold");
-
-        for (int i = 0; i < chartData.size(); i++) {
-            XYChart.Data<String, Number> dataPoint = new XYChart.Data<>(teamNames.get(i), chartData.get(i));
-            series.getData().add(dataPoint);
-        }
-
-        barChartData.add(series);
-        xAxis.setLabel("Teams");
-        chart = new BarChart<>(xAxis, yAxis, barChartData, 25.0d);
-        return chart;
-    }
     
-    public static ObservableList<Number> dataExtract(String property){
+     
+    private static ObservableList<Number> dataExtract(String property){
         ObservableList chartDataList = FXCollections.observableArrayList(); 
         for (Team x : data) {
             if (isFirstRow){
@@ -83,4 +46,67 @@ public class BarChartApp {
         }
         return chartDataList;
     }
+
+    public static Parent createBarGraph() {
+        xAxis = new CategoryAxis();
+        yAxis = new NumberAxis("Units Sold", 0.0d, 40, 10.0d);
+        chart = new BarChart<>(xAxis, yAxis);
+       
+        String[] chartTypes = {"ppg22", "ppg21", "pct22", "pct21", "assists22", "assists21", "tpg22", "tpg21", "trg22", "trg21"};
+       
+        
+        Button[] buttons = new Button[chartTypes.length];
+        for (int i = 0; i < buttons.length; i++) {
+            String x = chartTypes[i];
+            Button a = new Button(x);
+            a.setOnAction(e -> {chartData =  dataExtract(x);yAxis.setLabel(x);updateChart();isFirstRow = true;});
+            buttons [i] = a;
+        }
+        
+        for (Team entry : data) {
+            String teamName = entry.getTeamName();
+            
+            if (isFirstRow){
+                isFirstRow = false;
+                continue;
+            }
+            teamNames.add(teamName);
+            
+        }
+        isFirstRow = true;
+        xAxis.setGapStartAndEnd(true);
+        // Set the desired font size for the x-axis labels
+        double labelFontSize = 7.0;
+        xAxis.setStyle("-fx-tick-label-font-size: " + labelFontSize + "px;");
+        xAxis.setCategories(teamNames);
+
+         HBox buttonsLayout = new HBox(10);
+    buttonsLayout.getChildren().addAll(buttons);
+
+    // Create the bar chart layout
+    VBox chartLayout = new VBox(10);
+    chartLayout.getChildren().addAll(buttonsLayout, chart);
+
+    return chartLayout;
+}
+
+     
+
+        
+    
+   
+
+    private static void updateChart(){
+         if (chart == null) {
+            return;
+        }
+        chart.getData().clear();
+        BarChart.Series<String, Number> series = new BarChart.Series<>();
+          for (int i = 0; i < chartData.size(); i++) {
+            XYChart.Data<String, Number> dataPoint = new XYChart.Data<>(teamNames.get(i), chartData.get(i));
+            series.getData().add(dataPoint);
+        }
+        chart.getData().add(series);
+    }
+
 }
