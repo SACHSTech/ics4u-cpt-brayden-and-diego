@@ -66,11 +66,10 @@ import javafx.stage.Stage;
  * @related /Controls/TableCellFactory
  * @related /Controls/TreeTableView
  */
-public class TableViewApp extends Application {
+public class TableViewApp {
 
-    private TableView<Team> tableView;
 
-    public Parent createContent() {
+    public static Parent createTable() {
        
         final ObservableList<Team> data = FXCollections.observableArrayList(readFile.readDataFile("src/cpt/Comp Sci CPT spreadsheet - Points Per Game.csv"));
 
@@ -114,22 +113,11 @@ public class TableViewApp extends Application {
     }
     
     //method to use our sorting algorithmn on an obserbable list
-    private ObservableList<Team> sorter(ObservableList<Team> x, String property){
+    private static ObservableList<Team> sorter(ObservableList<Team> x, String property){
         ArrayList<Team> y = new ArrayList<>(x);
         Sortingpt2.sort(y, property);
         return FXCollections.observableArrayList(y);
     }
 
-    @Override public void start(Stage primaryStage) throws Exception {
-        primaryStage.setScene(new Scene(createContent()));
-        primaryStage.show();
-    }
 
-    /**
-     * Java main for when running without JavaFX launcher
-     * @param args command line arguments
-     */
-    public static void main(String[] args) {
-        launch(args);
-    }
 }
