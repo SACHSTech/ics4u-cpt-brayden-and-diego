@@ -19,15 +19,15 @@ import javafx.stage.Stage;
  * discontinuous or discrete data.
  */
 
-public class BarChartApp extends Application {
+public class BarChartApp {
  
-    final ObservableList<Team> data = FXCollections.observableArrayList(readFile.readDataFile("src/cpt/Comp Sci CPT spreadsheet - Points Per Game.csv"));
+    final static ObservableList<Team> data = FXCollections.observableArrayList(readFile.readDataFile("src/cpt/Comp Sci CPT spreadsheet - Points Per Game.csv"));
     
-    private BarChart<String, Number> chart;
-    private CategoryAxis xAxis;
-    private NumberAxis yAxis;
+    private static BarChart<String, Number> chart;
+    private static CategoryAxis xAxis;
+    private static NumberAxis yAxis;
 
-    public Parent createContent() {
+    public static Parent createBarGraph() {
         xAxis = new CategoryAxis();
         yAxis = new NumberAxis("Units Sold", 0.0d, 40, 10.0d);
 
@@ -67,15 +67,5 @@ public class BarChartApp extends Application {
         return chart;
     }
  
-    @Override public void start(Stage primaryStage) throws Exception {
-        primaryStage.setScene(new Scene(createContent()));
-        primaryStage.show();
-    }
- 
-    /**
-     * Java main for when running without JavaFX launcher
-     */
-    public static void main(String[] args) {
-        launch(args);
-    }
+    
 }
