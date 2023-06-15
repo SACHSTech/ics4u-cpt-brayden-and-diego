@@ -84,7 +84,7 @@ public class TabPaneApp extends Application {
         tabPane.setMinSize(TabPane.USE_PREF_SIZE, TabPane.USE_PREF_SIZE);
         tabPane.setMaxSize(TabPane.USE_PREF_SIZE, TabPane.USE_PREF_SIZE);
         tab1 = new Tab("Table");
-        tab2 = new Tab();
+        tab2 = new Tab("League Graphs");
         
 
         tabPane.setRotateGraphic(false);
@@ -95,56 +95,14 @@ public class TabPaneApp extends Application {
         tab1.setContent(TableViewApp.createTable());
         tabPane.getTabs().add(tab1);
         // Tab2 has longer label and toggles tab closing
-        tab2.setText("Longer Tab");
-        final VBox vboxLongTab = new VBox();
-        vboxLongTab.setSpacing(10);
-        vboxLongTab.setTranslateX(10);
-        vboxLongTab.setTranslateY(10);
-
-        Label explainRadios = new Label("Closing policy for tabs:");
-        vboxLongTab.getChildren().add(explainRadios);
-        ToggleGroup closingPolicy = new ToggleGroup();
-
-        for (TabClosingPolicy policy : TabClosingPolicy.values()) {
-            final RadioButton radioButton = new RadioButton(policy.name());
-            radioButton.setMnemonicParsing(false);
-            radioButton.setToggleGroup(closingPolicy);
-            radioButton.setOnAction((ActionEvent event) -> {
-                final TabClosingPolicy radioPolicy =
-                TabClosingPolicy.valueOf(radioButton.getText());
-                tabPane.setTabClosingPolicy(radioPolicy);
-            });
-            if (policy.name().equals(TabClosingPolicy.SELECTED_TAB.name())) {
-                radioButton.setSelected(true);
-            }
-            vboxLongTab.getChildren().add(radioButton);
-        }
-        tab2.setContent(vboxLongTab);
+        
+        tab2.setContent(BarChartApp.createBarGraph());
         tabPane.getTabs().add(tab2);
         
         return tabPane;
     }
 
-    private void toggleTabPosition(TabPane tabPane) {
-        Side pos = tabPane.getSide();
-        if (pos == Side.TOP) {
-            tabPane.setSide(Side.RIGHT);
-        } else if (pos == Side.RIGHT) {
-            tabPane.setSide(Side.BOTTOM);
-        } else if (pos == Side.BOTTOM) {
-            tabPane.setSide(Side.LEFT);
-        } else {
-            tabPane.setSide(Side.TOP);
-        }
-    }
-
-    private void toggleTabMode(TabPane tabPane) {
-        if (!tabPane.getStyleClass().contains(TabPane.STYLE_CLASS_FLOATING)) {
-            tabPane.getStyleClass().add(TabPane.STYLE_CLASS_FLOATING);
-        } else {
-            tabPane.getStyleClass().remove(TabPane.STYLE_CLASS_FLOATING);
-        }
-    }
+  
 
 
     @Override public void start(Stage primaryStage) throws Exception {
