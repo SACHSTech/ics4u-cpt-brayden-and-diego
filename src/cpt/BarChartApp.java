@@ -49,7 +49,7 @@ public class BarChartApp {
 
     public static Parent createBarGraph() {
         xAxis = new CategoryAxis();
-        yAxis = new NumberAxis("Units Sold", 0.0d, 40, 10.0d);
+        yAxis = new NumberAxis("Statistic", 10.0d, 130, 10.0d);
         chart = new BarChart<>(xAxis, yAxis);
        
         String[] chartTypes = {"ppg22", "ppg21", "pct22", "pct21", "assists22", "assists21", "tpg22", "tpg21", "trg22", "trg21"};
