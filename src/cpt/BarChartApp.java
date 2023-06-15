@@ -26,15 +26,14 @@ public class BarChartApp {
     private static BarChart<String, Number> chart;
     private static CategoryAxis xAxis;
     private static NumberAxis yAxis;
+    static ObservableList<String> teamNames = FXCollections.observableArrayList();
+    static ObservableList<Number> chartData = FXCollections.observableArrayList();
+    static boolean isFirstRow = true;
 
     public static Parent createBarGraph() {
         xAxis = new CategoryAxis();
         yAxis = new NumberAxis("Units Sold", 0.0d, 40, 10.0d);
-
-        ObservableList<String> teamNames = FXCollections.observableArrayList();
-        ObservableList<Number> chartData = FXCollections.observableArrayList();
-
-        boolean isFirstRow = true;
+        
         // Extract data from the first two columns of the ObservableList
         for (Team entry : data) {
             String teamName = entry.getTeamName();
@@ -44,17 +43,16 @@ public class BarChartApp {
                 continue;
             }
 
-            double unitsSold = Double.parseDouble(entry.getAssists21());
 
             teamNames.add(teamName);
-            chartData.add(unitsSold);
+            
         }
         xAxis.setGapStartAndEnd(true);
         // Set the desired font size for the x-axis labels
         double labelFontSize = 7.0;
 
 
-         xAxis.setStyle("-fx-tick-label-font-size: " + labelFontSize + "px;");
+        xAxis.setStyle("-fx-tick-label-font-size: " + labelFontSize + "px;");
 
         xAxis.setCategories(teamNames);
 
@@ -72,6 +70,17 @@ public class BarChartApp {
         chart = new BarChart<>(xAxis, yAxis, barChartData, 25.0d);
         return chart;
     }
- 
     
+    public static ObservableList<Number> dataExtract(String property){
+        ObservableList chartDataList = FXCollections.observableArrayList(); 
+        for (Team x : data) {
+            if (isFirstRow){
+                isFirstRow = false;
+                continue;
+            }
+            double statistic =  Double.parseDouble(Sortingpt2.getProperty(x, property));
+            chartDataList.add(statistic);
+        }
+        return chartDataList;
+    }
 }
