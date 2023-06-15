@@ -49,6 +49,12 @@ public class BarChartApp {
             teamNames.add(teamName);
             chartData.add(unitsSold);
         }
+        xAxis.setGapStartAndEnd(true);
+        // Set the desired font size for the x-axis labels
+        double labelFontSize = 7.0;
+
+
+         xAxis.setStyle("-fx-tick-label-font-size: " + labelFontSize + "px;");
 
         xAxis.setCategories(teamNames);
 
@@ -62,7 +68,7 @@ public class BarChartApp {
         }
 
         barChartData.add(series);
-
+        xAxis.setLabel("Teams");
         chart = new BarChart<>(xAxis, yAxis, barChartData, 25.0d);
         return chart;
     }
