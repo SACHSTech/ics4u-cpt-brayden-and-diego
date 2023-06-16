@@ -53,14 +53,23 @@ public class BarChartApp {
         chart = new BarChart<>(xAxis, yAxis);
        
         String[] chartTypes = {"ppg22", "ppg21", "pct22", "pct21", "assists22", "assists21", "tpg22", "tpg21", "trg22", "trg21"};
-       
+        String[] buttonNames = {"Points Per Game 2022", "Points Per Game 2021", "Shooting Percentage 2022", "Shooting Percentage 2021", "Assists Per Game 2022", "Assists Per Game 2021", "Turnovers Per Game 2022", "Turnovers Per Game 2021", "Total Rebounds Per Game 2022", "Total Rebounds Per Game 2021"};
+
         
         Button[] buttons = new Button[chartTypes.length];
         for (int i = 0; i < buttons.length; i++) {
-            String x = chartTypes[i];
-            Button a = new Button(x);
-            a.setOnAction(e -> {chartData =  dataExtract(x);yAxis.setLabel(x);updateChart();isFirstRow = true;});
-            buttons [i] = a;
+            String variable = chartTypes[i]; // String variable from the first array
+            String buttonText = buttonNames[i]; // String name for the button from the second array
+    
+            Button button = new Button(buttonText);
+            button.setOnAction(e -> {
+            chartData = dataExtract(variable);
+            yAxis.setLabel(variable);
+            updateChart();
+            isFirstRow = true;
+            });
+
+            buttons[i] = button;
         }
         
         for (Team entry : data) {
