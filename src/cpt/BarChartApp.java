@@ -34,6 +34,73 @@ public class BarChartApp {
     static ObservableList<Number> chartData = FXCollections.observableArrayList();
     //boolean to make sure the first line is always skipped (header)
     static boolean isFirstRow = true;
+
+
+    /**
+     * this method creates the bar graph 
+     * @return parent bar graph
+     */
+    public static Parent createBarGraph() {
+        xAxis = new CategoryAxis();
+        yAxis = new NumberAxis("Statistic", 10.0d, 130, 10.0d);
+        chart = new BarChart<>(xAxis, yAxis);
+        
+        //added arrays of all attributes and button maes
+        String[] chartTypes = {"ppg22", "ppg21", "pct22", "pct21", "assists22", "assists21", "tpg22", "tpg21", "trg22", "trg21"};
+        String[] buttonNames = {"Points Per Game 2022", "Points Per Game 2021", "Shooting Percentage 2022", "Shooting Percentage 2021", "Assists Per Game 2022", "Assists Per Game 2021", "Turnovers Per Game 2022", "Turnovers Per Game 2021", "Total Rebounds Per Game 2022", "Total Rebounds Per Game 2021"};
+
+        Button[] buttons = new Button[chartTypes.length];
+        
+        //for to create the nbuttons
+        for (int i = 0; i < buttons.length; i++) {
+            String variable = chartTypes[i]; // String variable from the first array
+            String buttonText = buttonNames[i]; // String name for the button from the second array
+            
+            Button button = new Button(buttonText);
+            
+            //on action, use the extract, set a new label, set auto ranging and use the helper method to update the chart
+            button.setOnAction(e -> {
+            chartData = dataExtract(variable);
+            yAxis.setLabel(buttonText);
+            yAxis.setAutoRanging(true);
+            updateChart();
+            isFirstRow = true;
+            });
+
+            //add the button weve just created to the arrat
+            buttons[i] = button;
+        }
+        
+        //add the Xaxis (team nemes)
+        for (Team entry : data) {
+            String teamName = entry.getTeamName();
+            
+            if (isFirstRow){
+                isFirstRow = false;
+                continue;
+            }
+            teamNames.add(teamName);
+            
+        }
+        //reset boolean
+        isFirstRow = true;
+        xAxis.setGapStartAndEnd(true);
+        
+        // Set the desired font size for the x-axis labels
+        double labelFontSize = 7.0;
+        xAxis.setStyle("-fx-tick-label-font-size: " + labelFontSize + "px;");
+        xAxis.setCategories(teamNames);
+
+        //button layout
+        HBox buttonsLayout = new HBox(10);
+        buttonsLayout.getChildren().addAll(buttons);
+
+        // Create the bar chart layout
+        VBox chartLayout = new VBox(10);
+        chartLayout.getChildren().addAll(buttonsLayout, chart);
+
+    return chartLayout;
+}
     
     /**
      * This method extracts a specific type of property of a team object to make a graph 
@@ -55,73 +122,17 @@ public class BarChartApp {
         }
         return chartDataList;
     }
-
-    /**
-     * this method creates the bar graph 
-     * @return parent bar graph
-     */
-    public static Parent createBarGraph() {
-        xAxis = new CategoryAxis();
-        yAxis = new NumberAxis("Statistic", 10.0d, 130, 10.0d);
-        chart = new BarChart<>(xAxis, yAxis);
-       
-        String[] chartTypes = {"ppg22", "ppg21", "pct22", "pct21", "assists22", "assists21", "tpg22", "tpg21", "trg22", "trg21"};
-        String[] buttonNames = {"Points Per Game 2022", "Points Per Game 2021", "Shooting Percentage 2022", "Shooting Percentage 2021", "Assists Per Game 2022", "Assists Per Game 2021", "Turnovers Per Game 2022", "Turnovers Per Game 2021", "Total Rebounds Per Game 2022", "Total Rebounds Per Game 2021"};
-
-        
-        Button[] buttons = new Button[chartTypes.length];
-        for (int i = 0; i < buttons.length; i++) {
-            int index = i;
-            String variable = chartTypes[i]; // String variable from the first array
-            String buttonText = buttonNames[i]; // String name for the button from the second array
-    
-            Button button = new Button(buttonText);
-            button.setOnAction(e -> {
-            chartData = dataExtract(variable);
-            yAxis.setLabel(buttonText);
-            yAxis.setAutoRanging(true);
-            updateChart();
-            isFirstRow = true;
-            });
-
-            buttons[i] = button;
-        }
-        
-        for (Team entry : data) {
-            String teamName = entry.getTeamName();
-            
-            if (isFirstRow){
-                isFirstRow = false;
-                continue;
-            }
-            teamNames.add(teamName);
-            
-        }
-        isFirstRow = true;
-        xAxis.setGapStartAndEnd(true);
-        // Set the desired font size for the x-axis labels
-        double labelFontSize = 7.0;
-        xAxis.setStyle("-fx-tick-label-font-size: " + labelFontSize + "px;");
-        xAxis.setCategories(teamNames);
-
-         HBox buttonsLayout = new HBox(10);
-    buttonsLayout.getChildren().addAll(buttons);
-
-    // Create the bar chart layout
-    VBox chartLayout = new VBox(10);
-    chartLayout.getChildren().addAll(buttonsLayout, chart);
-
-    return chartLayout;
-}
-
      
 
         
     
    
-
+    /**
+     * this method updates the chart, used after button pressed
+     */
     private static void updateChart(){
-         if (chart == null) {
+        //prevents the code from breaking when it tries to clear a null chart 
+        if (chart == null) {
             return;
         }
         chart.getData().clear();
