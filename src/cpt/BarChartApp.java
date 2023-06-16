@@ -23,19 +23,28 @@ import javafx.stage.Stage;
  */
 
 public class BarChartApp {
- 
+    //read the data file into an observablelist
     final static ObservableList<Team> data = FXCollections.observableArrayList(readFile.readDataFile("src/cpt/Comp Sci CPT spreadsheet - Points Per Game.csv"));
     
+    //create chart, axis and the arraylist of the both axis
     private static BarChart<String, Number> chart;
     private static CategoryAxis xAxis;
     private static NumberAxis yAxis;
     static ObservableList<String> teamNames = FXCollections.observableArrayList();
     static ObservableList<Number> chartData = FXCollections.observableArrayList();
+    //boolean to make sure the first line is always skipped (header)
     static boolean isFirstRow = true;
     
-     
+    /**
+     * This method extracts a specific type of property of a team object to make a graph 
+     * @param property: the property we want to the make graph gor
+     * @return: an obserbable list with the whole data 
+     */ 
     private static ObservableList<Number> dataExtract(String property){
+        //declare the data list
         ObservableList chartDataList = FXCollections.observableArrayList(); 
+        
+        //for each team in data, skip first row, get the desired stat, put into the arraylist
         for (Team x : data) {
             if (isFirstRow){
                 isFirstRow = false;
@@ -47,6 +56,10 @@ public class BarChartApp {
         return chartDataList;
     }
 
+    /**
+     * this method creates the bar graph 
+     * @return parent bar graph
+     */
     public static Parent createBarGraph() {
         xAxis = new CategoryAxis();
         yAxis = new NumberAxis("Statistic", 10.0d, 130, 10.0d);
@@ -58,13 +71,15 @@ public class BarChartApp {
         
         Button[] buttons = new Button[chartTypes.length];
         for (int i = 0; i < buttons.length; i++) {
+            int index = i;
             String variable = chartTypes[i]; // String variable from the first array
             String buttonText = buttonNames[i]; // String name for the button from the second array
     
             Button button = new Button(buttonText);
             button.setOnAction(e -> {
             chartData = dataExtract(variable);
-            yAxis.setLabel(variable);
+            yAxis.setLabel(buttonText);
+            yAxis.setAutoRanging(true);
             updateChart();
             isFirstRow = true;
             });
