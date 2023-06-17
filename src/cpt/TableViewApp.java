@@ -34,10 +34,12 @@ package cpt;
 
 
 import java.util.ArrayList;
-
+import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.Event;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -68,6 +70,7 @@ import javafx.stage.Stage;
  */
 public class TableViewApp {
 
+    private static TextField search;
 
     public static Parent createTable() {
        
@@ -98,6 +101,10 @@ public class TableViewApp {
         }
 
        
+        search = new TextField();
+        search.setPromptText("Search for Team: ");
+        search.setOnKeyReleased(event -> handleSearch(event, tableView, data));
+
 
         HBox buttons = new HBox(10);
         buttons.getChildren().addAll(buttonsFinal);
@@ -106,7 +113,7 @@ public class TableViewApp {
         
 
         VBox finalDisplay = new VBox(10);
-        finalDisplay.getChildren().addAll(buttons, tableView);
+        finalDisplay.getChildren().addAll(search, buttons, tableView);
 
         return finalDisplay;
 
@@ -118,6 +125,20 @@ public class TableViewApp {
         Sortingpt2.sort(y, property);
         return FXCollections.observableArrayList(y);
     }
+
+   private static void handleSearch(KeyEvent event, TableView<Team> tableView, ObservableList<Team> data) {
+        String searchText = search.getText().toLowerCase();
+        ObservableList<Team> filteredData = FXCollections.observableArrayList();
+
+        for (Team team : data) {
+            if (team.getTeamName().toLowerCase().contains(searchText)) {
+                filteredData.add(team);
+        }
+    }
+
+        tableView.setItems(filteredData);
+}
+
 
 
 }
