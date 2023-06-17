@@ -77,39 +77,41 @@ public class TableViewApp {
         final ObservableList<Team> data = FXCollections.observableArrayList(readFile.readDataFile("src/cpt/Comp Sci CPT spreadsheet - Points Per Game.csv"));
 
         
-        TableView tableView = new TableView();
+        TableView tableView = new TableView(); //create new tableview
        
+        //create two string arrays for the column name and the fields that go within the cells
         final String[] columns = {"Team Name", "PPG 2022", "PPG 2021", "PCT 2022", "PCT 2021", "Assists 2022", "Assists 2021", "TPG 2022", "TPG 2021", "TRG 2022", "TRG 2021" };
         final String[] teamFields = {"teamName", "ppg22", "ppg21", "pct22", "pct21", "assists22", "assists21", "tpg22", "tpg21", "trg22", "trg21" };
         
         TableColumn<Team, String>[] columnsFinal = new TableColumn[columns.length];
 
+
         for (int i =0; i < columns.length; i ++){
-            TableColumn<Team, String> x = new TableColumn<>(columns[i]);
-            x.setCellValueFactory(new PropertyValueFactory<>(teamFields[i]));
+            TableColumn<Team, String> x = new TableColumn<>(columns[i]); //create a new column with name grabbed from string array column
+            x.setCellValueFactory(new PropertyValueFactory<>(teamFields[i])); //Set the cell value factory using the field name
             columnsFinal[i] = x;
         }
         
 
         Button [] buttonsFinal = new Button[columns.length];
         for (int i = 0; i < columns.length; i++) {
-            final int index = i;
-            String x = columns[i];
-            Button button = new Button("Sort by " + x);
-            button.setOnAction(e -> tableView.setItems(sorter(data, teamFields[index])));
+            final int index = i; 
+            String x = columns[i]; //get column name
+            Button button = new Button("Sort by " + x); //create a new button that gives users the option to sort by properties
+            button.setOnAction(e -> tableView.setItems(sorter(data, teamFields[index]))); //call the sorter method to sort data based on column
             buttonsFinal[i] = button;
         }
 
        
-        search = new TextField();
+        search = new TextField(); //create a textfield to allow users to sort
         search.setPromptText("Search for Team: ");
         search.setOnKeyReleased(event -> handleSearch(event, tableView, data));
 
 
         HBox buttons = new HBox(10);
-        buttons.getChildren().addAll(buttonsFinal);
+        buttons.getChildren().addAll(buttonsFinal); // Add all the buttons to the buttons layout
         tableView.setItems(data);
-        tableView.getColumns().addAll(columnsFinal);
+        tableView.getColumns().addAll(columnsFinal); // Add all the columns to the TableView
         
 
         VBox finalDisplay = new VBox(10);
@@ -127,10 +129,11 @@ public class TableViewApp {
     }
 
    private static void handleSearch(KeyEvent event, TableView<Team> tableView, ObservableList<Team> data) {
-        String searchText = search.getText().toLowerCase();
-        ObservableList<Team> filteredData = FXCollections.observableArrayList();
+        String searchText = search.getText().toLowerCase(); //retrive search text given by user and change to lowercase
+        ObservableList<Team> filteredData = FXCollections.observableArrayList(); //create a new observable list for filtered data
 
         for (Team team : data) {
+            //match search text with teamnames using getter method
             if (team.getTeamName().toLowerCase().contains(searchText)) {
                 filteredData.add(team);
         }

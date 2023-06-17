@@ -81,23 +81,25 @@ public class TabPaneApp extends Application {
         
         tabPane = new TabPane();
         tabPane.setPrefSize(1400, 600);
-        tabPane.setMinSize(TabPane.USE_PREF_SIZE, TabPane.USE_PREF_SIZE);
-        tabPane.setMaxSize(TabPane.USE_PREF_SIZE, TabPane.USE_PREF_SIZE);
-        tab1 = new Tab("Table");
-        tab2 = new Tab("League Graphs");
+        tabPane.setMinSize(TabPane.USE_PREF_SIZE, TabPane.USE_PREF_SIZE); //set min size
+        tabPane.setMaxSize(TabPane.USE_PREF_SIZE, TabPane.USE_PREF_SIZE); //set max size
+        tab1 = new Tab("Table"); //create new tab called Table
+        tab2 = new Tab("League Graphs"); //create new tab called League Graphs
         
 
-        tabPane.setRotateGraphic(false);
+        tabPane.setRotateGraphic(false); //Set whether the tab graphic is rotated
         tabPane.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
         tabPane.setSide(Side.TOP);
         
         
         tab1.setContent(TableViewApp.createTable());
-        tabPane.getTabs().add(tab1);
+        tabPane.getTabs().add(tab1); // Add tab1 to the TabPane
+    
         // Tab2 has longer label and toggles tab closing
         
         tab2.setContent(BarChartApp.createBarGraph());
-        tabPane.getTabs().add(tab2);
+        tabPane.getTabs().add(tab2); // Add tab2 to the TabPane
+    
         
         return tabPane;
     }
