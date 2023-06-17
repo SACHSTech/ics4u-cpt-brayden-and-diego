@@ -124,7 +124,6 @@ public class BarChartApp {
         return chartDataList;
     }
      
-<<<<<<< HEAD
 
         
     
@@ -134,10 +133,6 @@ public class BarChartApp {
      */
     private static void updateChart(){
         //prevents the code from breaking when it tries to clear a null chart 
-=======
-    private static void updateChart(){
-        //check if chart exists
->>>>>>> origin/master
         if (chart == null) {
             return;
         }
