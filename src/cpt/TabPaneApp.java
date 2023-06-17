@@ -76,7 +76,10 @@ public class TabPaneApp extends Application {
     private Tab tab1;
     private Tab tab2;
    
-
+    /**
+     * Creates the content for the application.
+     * @return The Parent object representing the content of the application.
+     */
     public Parent createContent() {
         
         tabPane = new TabPane();
@@ -104,9 +107,7 @@ public class TabPaneApp extends Application {
         return tabPane;
     }
 
-  
-
-
+    
     @Override public void start(Stage primaryStage) throws Exception {
         primaryStage.setScene(new Scene(createContent()));
         primaryStage.show();
