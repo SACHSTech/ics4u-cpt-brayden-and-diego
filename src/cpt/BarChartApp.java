@@ -41,6 +41,7 @@ public class BarChartApp {
      * @return parent bar graph
      */
     public static Parent createBarGraph() {
+        //create x and y axis
         xAxis = new CategoryAxis();
         yAxis = new NumberAxis("Statistic", 10.0d, 130, 10.0d);
         chart = new BarChart<>(xAxis, yAxis);
@@ -74,7 +75,7 @@ public class BarChartApp {
         //add the Xaxis (team nemes)
         for (Team entry : data) {
             String teamName = entry.getTeamName();
-            
+            //skip first row
             if (isFirstRow){
                 isFirstRow = false;
                 continue;
@@ -123,6 +124,7 @@ public class BarChartApp {
         return chartDataList;
     }
      
+<<<<<<< HEAD
 
         
     
@@ -132,15 +134,23 @@ public class BarChartApp {
      */
     private static void updateChart(){
         //prevents the code from breaking when it tries to clear a null chart 
+=======
+    private static void updateChart(){
+        //check if chart exists
+>>>>>>> origin/master
         if (chart == null) {
             return;
         }
+        //clear data from chart
         chart.getData().clear();
+
+        //Iterate over the chartData list
         BarChart.Series<String, Number> series = new BarChart.Series<>();
           for (int i = 0; i < chartData.size(); i++) {
-            XYChart.Data<String, Number> dataPoint = new XYChart.Data<>(teamNames.get(i), chartData.get(i));
+            XYChart.Data<String, Number> dataPoint = new XYChart.Data<>(teamNames.get(i), chartData.get(i));  // Create a data point for each item in the chartData list
             series.getData().add(dataPoint);
         }
+        //add series to the chart
         chart.getData().add(series);
     }
 
