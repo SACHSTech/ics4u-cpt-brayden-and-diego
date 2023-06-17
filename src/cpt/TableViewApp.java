@@ -72,6 +72,10 @@ public class TableViewApp {
 
     private static TextField search;
 
+    /**
+     * this method creates the table
+     * @return table
+     */
     public static Parent createTable() {
        
         final ObservableList<Team> data = FXCollections.observableArrayList(readFile.readDataFile("src/cpt/Comp Sci CPT spreadsheet - Points Per Game.csv"));
@@ -121,14 +125,25 @@ public class TableViewApp {
 
     }
     
-    //method to use our sorting algorithmn on an obserbable list
+    /**
+     * this method sorts and returns the observable list
+     * @return sorted observable list
+     * @param property: the property we want to the make graph gor
+     * @param x: the name of the column
+     */
     private static ObservableList<Team> sorter(ObservableList<Team> x, String property){
         ArrayList<Team> y = new ArrayList<>(x);
         Sortingpt2.sort(y, property);
         return FXCollections.observableArrayList(y);
     }
 
-   private static void handleSearch(KeyEvent event, TableView<Team> tableView, ObservableList<Team> data) {
+    /**
+     * this method filters and sorts the data provided and updates the tableview to display the data
+     * @param event: the event that occurs
+     * @param tableView: the table whose items are affected
+     * @param data: the data set provided
+     */
+    private static void handleSearch(KeyEvent event, TableView<Team> tableView, ObservableList<Team> data) {
         String searchText = search.getText().toLowerCase(); //retrive search text given by user and change to lowercase
         ObservableList<Team> filteredData = FXCollections.observableArrayList(); //create a new observable list for filtered data
 

@@ -105,7 +105,7 @@ public class BarChartApp {
     
     /**
      * This method extracts a specific type of property of a team object to make a graph 
-     * @param property: the property we want to the make graph gor
+     * @param property: the property we want to the make graph for
      * @return: an obserbable list with the whole data 
      */ 
     private static ObservableList<Number> dataExtract(String property){
