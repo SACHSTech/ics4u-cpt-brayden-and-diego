@@ -23,9 +23,8 @@ import javafx.stage.Stage;
  */
 
 public class BarChartApp {
- 
+    //declare variables used for bar graph
     final static ObservableList<Team> data = FXCollections.observableArrayList(readFile.readDataFile("src/cpt/Comp Sci CPT spreadsheet - Points Per Game.csv"));
-    
     private static BarChart<String, Number> chart;
     private static CategoryAxis xAxis;
     private static NumberAxis yAxis;
@@ -33,10 +32,13 @@ public class BarChartApp {
     static ObservableList<Number> chartData = FXCollections.observableArrayList();
     static boolean isFirstRow = true;
     
-     
+    
     private static ObservableList<Number> dataExtract(String property){
+        
         ObservableList chartDataList = FXCollections.observableArrayList(); 
+        // Iterate over each Team object in the data collection
         for (Team x : data) {
+            //skip the first row
             if (isFirstRow){
                 isFirstRow = false;
                 continue;
@@ -48,10 +50,12 @@ public class BarChartApp {
     }
 
     public static Parent createBarGraph() {
+        //create x and y axis
         xAxis = new CategoryAxis();
         yAxis = new NumberAxis("Statistic", 10.0d, 130, 10.0d);
         chart = new BarChart<>(xAxis, yAxis);
        
+        //create two string arrays; one for the name of the button and the other for the getter method it will call
         String[] chartTypes = {"ppg22", "ppg21", "pct22", "pct21", "assists22", "assists21", "tpg22", "tpg21", "trg22", "trg21"};
         String[] buttonNames = {"Points Per Game 2022", "Points Per Game 2021", "Shooting Percentage 2022", "Shooting Percentage 2021", "Assists Per Game 2022", "Assists Per Game 2021", "Turnovers Per Game 2022", "Turnovers Per Game 2021", "Total Rebounds Per Game 2022", "Total Rebounds Per Game 2021"};
 
@@ -74,7 +78,7 @@ public class BarChartApp {
         
         for (Team entry : data) {
             String teamName = entry.getTeamName();
-            
+            //skip first row
             if (isFirstRow){
                 isFirstRow = false;
                 continue;
@@ -100,21 +104,21 @@ public class BarChartApp {
 }
 
      
-
-        
-    
-   
-
     private static void updateChart(){
-         if (chart == null) {
+        //check if chart exists
+        if (chart == null) {
             return;
         }
+        //clear data from chart
         chart.getData().clear();
+
+        //Iterate over the chartData list
         BarChart.Series<String, Number> series = new BarChart.Series<>();
           for (int i = 0; i < chartData.size(); i++) {
-            XYChart.Data<String, Number> dataPoint = new XYChart.Data<>(teamNames.get(i), chartData.get(i));
+            XYChart.Data<String, Number> dataPoint = new XYChart.Data<>(teamNames.get(i), chartData.get(i));  // Create a data point for each item in the chartData list
             series.getData().add(dataPoint);
         }
+        //add series to the chart
         chart.getData().add(series);
     }
 
