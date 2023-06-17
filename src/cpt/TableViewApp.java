@@ -133,6 +133,7 @@ public class TableViewApp {
         ObservableList<Team> filteredData = FXCollections.observableArrayList(); //create a new observable list for filtered data
 
         for (Team team : data) {
+            //match search text with teamnames using getter method
             if (team.getTeamName().toLowerCase().contains(searchText)) {
                 filteredData.add(team);
         }
