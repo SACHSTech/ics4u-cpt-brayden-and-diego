@@ -109,9 +109,9 @@ public class TableViewApp {
 
 
         HBox buttons = new HBox(10);
-        buttons.getChildren().addAll(buttonsFinal);
+        buttons.getChildren().addAll(buttonsFinal); // Add all the buttons to the buttons layout
         tableView.setItems(data);
-        tableView.getColumns().addAll(columnsFinal);
+        tableView.getColumns().addAll(columnsFinal); // Add all the columns to the TableView
         
 
         VBox finalDisplay = new VBox(10);
