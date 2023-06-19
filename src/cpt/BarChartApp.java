@@ -124,9 +124,6 @@ public class BarChartApp {
         return chartDataList;
     }
      
-
-        
-    
    
     /**
      * this method updates the chart, used after button pressed
