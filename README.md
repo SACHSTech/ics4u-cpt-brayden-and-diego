@@ -23,3 +23,6 @@ We selected this data of the project as it was easy to apply OOP concepts to it.
 ### Diego
 * https://drive.google.com/file/d/1daJz1xBEZehd6HAMI8CFWYlk4Q0t0HD9/view?usp=sharing
 * https://drive.google.com/file/d/1xFr_I_0Cj4PhbYClGGn5cHjyFVZxJPZP/view?usp=sharing
+
+### Brayden
+* https://drive.google.com/file/d/1SCih0K94zPhszep9qChfKj3EVphBS03A/view?usp=sharing
