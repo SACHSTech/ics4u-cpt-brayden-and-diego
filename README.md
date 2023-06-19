@@ -18,6 +18,8 @@ The data that was chosen for this project entails all of the major statisitcs fo
 We selected this data of the project as it was easy to apply OOP concepts to it. Each team can be classed as an object and the statistics are parameters of the object. Furthermore this data can be represented in a variety of different ways and can be used to extract a variety of different trends and patterns in the evolution of the game. 
 
 ## Links
+* https://www.teamrankings.com/nba/team-stats/
+
 ### Diego
 * https://drive.google.com/file/d/1daJz1xBEZehd6HAMI8CFWYlk4Q0t0HD9/view?usp=sharing
 * https://drive.google.com/file/d/1xFr_I_0Cj4PhbYClGGn5cHjyFVZxJPZP/view?usp=sharing
