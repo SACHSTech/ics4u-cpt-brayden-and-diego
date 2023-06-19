@@ -25,7 +25,6 @@ public class readFile {
                String[] arrTemp = nextLine.split(",");
                Team a = new Team(arrTemp[0].toString(), arrTemp[1].toString(), arrTemp[2].toString(), arrTemp[3].toString(), arrTemp[4].toString(), arrTemp[5].toString(), arrTemp[6].toString(), arrTemp[7].toString(), arrTemp[8].toString(), arrTemp[9].toString(), arrTemp[10].toString());
                list.add(a); 
-                
             }
         
         } catch (FileNotFoundException e) {
