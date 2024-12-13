@@ -28,8 +28,7 @@ public class BarChartApp extends Application {
         xAxis = new CategoryAxis();
         xAxis.setCategories(FXCollections.<String>observableArrayList(years));
         yAxis = new NumberAxis("Units Sold", 0.0d, 3000.0d, 1000.0d);
-        ObservableList<BarChart.Series> barChartData =
-            FXCollections.observableArrayList(
+        ObservableList<BarChart.Series> barChartData = FXCollections.observableArrayList(
               new BarChart.Series("Apples", FXCollections.observableArrayList(
                 new BarChart.Data(years[0], 567d),
                 new BarChart.Data(years[1], 1292d),
